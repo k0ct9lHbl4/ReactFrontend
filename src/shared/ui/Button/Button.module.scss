@@ -1,0 +1,20 @@
+.button {
+  cursor: pointer;
+  object-fit: cover;
+  color: inherit;
+}
+
+.clear {
+  padding: 0;
+  border: none;
+  border-image: none;
+  background: none;
+  outline: none;
+}
+
+.outline {
+  padding: 10px 16px;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  background: none;
+}

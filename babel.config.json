@@ -1,0 +1,10 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-typescript",
+    // "runtime": "automatic" чтобы не ругался на React is not defined в тестах,
+    // то есть react будет автоматически подставляться в рантайме теста без импорта
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ],
+  "plugins": ["i18next-extract"]
+}

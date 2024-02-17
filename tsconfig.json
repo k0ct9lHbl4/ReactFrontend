@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    // Куда производится сборка (в данном случае не важна, т.к. собирает с помощью webpack)
+    "outDir": "./dist/",
+    // Подсвечивает все места, где не указан тип (надо явно указывать)
+    "noImplicitAny": true,
+    // Модульная система (commonJs, esNext, es6) - различные способы модульной сборки
+    "module": "ESNext",
+    // Версия es, в которую будет компилироваться код (для поддержки большинства браузеров)
+    "target": "es5",
+    // Чтобы работать с jsx.
+    // "react" от "react-jsx" отличается тем,
+    // что в последнем случае не надо писать import react from "react" (react 17+ версии позволяет)
+    "jsx": "react-jsx",
+    // Компилятор будет обрабатывать не только ts файлы, но и js файлы
+    "allowJs": true,
+    // Определяет то, какие импорты будут (classic - require, node - import)
+    "moduleResolution": "node",
+    // Позволяет работать с пакетами, которые используют commonJS (module.exports и require),
+    // как с обычными пакетами (import ... from ...)
+    "esModuleInterop": true,
+    // Если какая-то библиотека не имеет export default,
+    // loaders типа ts-loader или babel-loader создают их
+    // (не надо будет писать import * as packageName from "package-name")
+    "allowSyntheticDefaultImports": true,
+    // Для абсолютный путей при импорте
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./src/*"]
+    }
+  },
+  // Дополнительные настройки для ts-node, чтобы работали нормальные импорты,
+  // т.к. ts-node по умолчанию не поддерживает ничего, кроме commonJs
+  // У нас в свойстве module (выше) не commonJs, поэтому нужна эта настройка
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}
