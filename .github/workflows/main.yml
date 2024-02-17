@@ -16,8 +16,8 @@ jobs:
         node-version: [18.x]
 
     steps:
-      # Устанавливаем node.js на машину, которая запускает проверки
       - uses: actions/checkout@v2
+      # Устанавливаем node.js на машину, которая запускает проверки
       - name: Starting Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
