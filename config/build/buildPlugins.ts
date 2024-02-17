@@ -12,8 +12,8 @@ import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import { BuildOptions } from "./types/config";
 
 export function buildPlugins({ paths, isDev }: BuildOptions): WebpackPluginInstance[] {
-  return [
-    // Чтоб html файл создавался в build
+  const plugins: WebpackPluginInstance[] = [
+    // Чтобы html файл создавался в build
     new HtmlWebpackPlugin({
       // Шаблон для создания html файла в build
       template: paths.html,
@@ -30,19 +30,25 @@ export function buildPlugins({ paths, isDev }: BuildOptions): WebpackPluginInsta
     new DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
     }),
-
-    // Оба плагина для hot module replacement (HMR). Также надо добавить hot: true в devServer
-    new HotModuleReplacementPlugin(),
-    new ReactRefreshWebpackPlugin(),
-
-    // Следить за прогрессом сборки
-    new ProgressPlugin(),
-
-    // Анализ размера бандла
-    new BundleAnalyzerPlugin({
-      // Чтобы не открывал в браузере вкладку автоматически
-      // (если захотим посмотреть на бандл, в терминале будет ссылка)
-      openAnalyzer: false,
-    }),
   ];
+
+  if (isDev) {
+    plugins.push(
+      // Оба плагина для hot module replacement (HMR). Также надо добавить hot: true в devServer
+      new HotModuleReplacementPlugin(),
+      new ReactRefreshWebpackPlugin(),
+
+      // Следить за прогрессом сборки
+      new ProgressPlugin(),
+
+      // Анализ размера бандла
+      new BundleAnalyzerPlugin({
+        // Чтобы не открывал в браузере вкладку автоматически
+        // (если захотим посмотреть на бандл, в терминале будет ссылка)
+        openAnalyzer: false,
+      })
+    );
+  }
+
+  return plugins;
 }
