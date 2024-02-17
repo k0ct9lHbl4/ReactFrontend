@@ -1,18 +1,35 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Lint/Test/Build
+# Будет отрабатывать на push и pull request в main ветку
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
-  Explore-GitHub-Actions:
+  # Название job-ы
+  Github-Actions-Job:
+    # На какой ОС будут запускаться проверки
     runs-on: ubuntu-latest
+    # Какая версия node.js будет использоваться
+    strategy:
+      matrix:
+        node-version: [18.x]
+
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      # Устанавливаем node.js на машину, которая запускает проверки
+      - uses: actions/checkout@v2
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      # Запускаем собственные скрипты
+      - name: install modules
+        run: npm install
+      - name: project production build
+        run: npm run build:prod
+      - name: linting typescript
+        run: npm run lint:ts
+      - name: linting styles
+        run: npm run lint:scss
+      - name: unit testing
+        run: npm run test:unit
