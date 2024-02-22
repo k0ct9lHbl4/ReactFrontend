@@ -4,7 +4,7 @@ import { ThemeEnum, useTheme } from "app/providers/ThemeProvider";
 
 import ThemeIcon from "shared/icons/theme.svg";
 import { classNames } from "shared/lib/class-names/classNames";
-import { Button, ThemeButtonEnum } from "shared/ui/Button/Button";
+import { Button, ButtonThemeEnum } from "shared/ui/Button/Button";
 
 interface ThemeSwitcherProps {
   className?: string;
@@ -16,7 +16,7 @@ export const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className, ...otherProps
   return (
     <Button
       onClick={toggleTheme}
-      theme={ThemeButtonEnum.CLEAR}
+      theme={ButtonThemeEnum.CLEAR}
       className={classNames(className)}
       {...otherProps}
     >

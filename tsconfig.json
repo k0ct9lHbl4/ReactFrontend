@@ -14,7 +14,9 @@
     "jsx": "react-jsx",
     // Компилятор будет обрабатывать не только ts файлы, но и js файлы
     "allowJs": true,
-    // Определяет то, какие импорты будут (classic - require, node - import)
+    // Как происходит resolve модулей
+    // classic - index файлы сами по себе не резолвятся из папки
+    // node - то, как работает в node (резолвятся)
     "moduleResolution": "node",
     // Позволяет работать с пакетами, которые используют commonJS (module.exports и require),
     // как с обычными пакетами (import ... from ...)

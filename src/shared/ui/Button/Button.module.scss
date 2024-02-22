@@ -2,6 +2,7 @@
   cursor: pointer;
   object-fit: cover;
   color: inherit;
+  padding: 8px 12px;
 }
 
 .clear {
@@ -13,8 +14,46 @@
 }
 
 .outline {
-  padding: 10px 16px;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   background: none;
+}
+
+.backgroundPrimary {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+}
+
+.backgroundInverted {
+  background-color: var(--inverted-bg-color);
+  color: var(--inverted-primary-color);
+}
+
+.size_m {
+  font: var(--font-m);
+}
+
+.size_l {
+  font: var(--font-l);
+}
+
+.size_xl {
+  font: var(--font-xl);
+}
+
+.square {
+  padding: 0;
+  aspect-ratio: 1;
+
+  &.size_m {
+    height: var(--font-line-m);
+  }
+
+  &.size_l {
+    height: var(--font-line-l);
+  }
+
+  &.size_xl {
+    height: var(--font-line-xl);
+  }
 }
